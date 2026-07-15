@@ -6,6 +6,5 @@ minify = true
 
 [vars]
 APP_URL = "https://arystal010.github.io/ArysAi-Website/"
-OPENROUTER_API_KEY = "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"
 # Add your OpenRouter API key as a secret (never put it here):
 # wrangler secret put OPENROUTER_API_KEY
