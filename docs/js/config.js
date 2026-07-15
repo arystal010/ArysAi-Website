@@ -1,7 +1,7 @@
 // frontend/js/config.js
 
 export const CONFIG = {
-    API_URL: "https://hiyygtyujio.ackcrp.workers.dev/api/chat",
+    API_URL: "https://arysaiwebsite.ackcrp.workers.dev/api/chat",
 
     APP_NAME: "Arys AI",
 
