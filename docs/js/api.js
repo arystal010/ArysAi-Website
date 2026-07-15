@@ -1,5 +1,3 @@
-// frontend/js/api.js
-
 import { CONFIG } from "./config.js";
 
 let controller = null;
@@ -25,9 +23,7 @@ export async function streamChat({
 
         const response = await fetch(CONFIG.API_URL, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ messages }),
             signal: controller.signal
         });
@@ -38,12 +34,10 @@ export async function streamChat({
 
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
-
         let fullText = "";
 
         while (true) {
             const { value, done } = await reader.read();
-
             if (done) break;
 
             const chunk = decoder.decode(value, { stream: true });
@@ -61,18 +55,13 @@ export async function streamChat({
                 }
 
                 let json;
-                try {
-                    json = JSON.parse(payload);
-                } catch {
-                    continue;
-                }
+                try { json = JSON.parse(payload); } catch { continue; }
 
                 const token = json?.choices?.[0]?.delta?.content;
-
                 if (!token) continue;
 
                 fullText += token;
-                onToken(token, fullText);
+                await onToken(token, fullText);  // ← was missing await
             }
         }
 
