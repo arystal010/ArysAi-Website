@@ -1,0 +1,27 @@
+// pacag.jsone
+
+{
+  "name": "arys-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Arys AI - GitHub Pages + Cloudflare Workers + OpenRouter",
+
+  "type": "module",
+
+  "scripts": {
+
+    "dev": "wrangler dev",
+
+    "deploy": "wrangler deploy",
+
+    "tail": "wrangler tail"
+
+  },
+
+  "devDependencies": {
+
+    "wrangler": "^4.28.1"
+
+  }
+
+}
