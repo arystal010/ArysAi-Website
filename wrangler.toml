@@ -1,0 +1,29 @@
+# 
+
+name = "arys-ai"
+
+main = "worker/index.js"
+
+compatibility_date = "2026-07-15"
+
+workers_dev = true
+
+minify = true
+
+[observability.logs]
+enabled = true
+
+[vars]
+
+APP_URL = "https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPOSITORY"
+
+# OPENROUTER_API_KEY را اینجا قرار نده!
+# بعداً با دستور زیر اضافه می‌شود:
+#
+# wrangler secret put OPENROUTER_API_KEY
+
+[placement]
+mode = "smart"
+
+[limits]
+cpu_ms = 300000
