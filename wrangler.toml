@@ -1,0 +1,11 @@
+name = "arys-ai"
+main = "worker/index.js"
+compatibility_date = "2026-07-15"
+workers_dev = true
+minify = true
+
+[vars]
+APP_URL = "https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPOSITORY"
+
+# Add your OpenRouter API key as a secret (never put it here):
+# wrangler secret put OPENROUTER_API_KEY

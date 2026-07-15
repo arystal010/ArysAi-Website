@@ -1,0 +1,165 @@
+/* frontend/css/themes.css */
+
+:root {
+    color-scheme: dark light;
+}
+
+/* DARK */
+
+body.dark {
+    --bg: #0b0f17;
+    --bg-secondary: #111827;
+    --surface: #171f2e;
+    --surface-hover: #263245;
+    --text: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border: #2b3649;
+    --primary: #4f8cff;
+    --primary-hover: #6ea3ff;
+    --code: #020617;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* LIGHT */
+
+body.light {
+    --bg: #f5f7fb;
+    --bg-secondary: #ffffff;
+    --surface: #ffffff;
+    --surface-hover: #eef2f7;
+    --text: #111827;
+    --text-secondary: #64748b;
+    --border: #dbe4f0;
+    --primary: #2563eb;
+    --primary-hover: #3b82f6;
+    --code: #eef2f7;
+    background: var(--bg);
+    color: var(--text);
+}
+
+body {
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+.topbar,
+.composer,
+.input-box,
+.bubble,
+.icon-btn,
+.primary,
+.secondary,
+.action-btn {
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+body.light .topbar {
+    background: rgba(255, 255, 255, 0.78);
+}
+
+body.dark .topbar {
+    background: rgba(13, 18, 29, 0.75);
+}
+
+body.light .composer {
+    background: linear-gradient(to top, rgba(245, 247, 251, 1), rgba(245, 247, 251, 0.85));
+}
+
+body.dark .composer {
+    background: linear-gradient(to top, rgba(11, 15, 23, 1), rgba(11, 15, 23, 0.85));
+}
+
+body.light .input-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+
+body.dark .input-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+
+body.light #prompt {
+    color: #111827;
+}
+
+body.dark #prompt {
+    color: #ffffff;
+}
+
+body.light pre {
+    background: #eef2f7;
+}
+
+body.dark pre {
+    background: #020617;
+}
+
+body.light code {
+    color: #0f172a;
+}
+
+body.dark code {
+    color: #f8fafc;
+}
+
+body.light blockquote {
+    border-left-color: #2563eb;
+    color: #475569;
+}
+
+body.dark blockquote {
+    border-left-color: #60a5fa;
+    color: #cbd5e1;
+}
+
+body.light .icon-btn:hover {
+    background: #eef2f7;
+}
+
+body.dark .icon-btn:hover {
+    background: #263245;
+}
+
+body.light .action-btn:hover {
+    background: #eef2f7;
+}
+
+body.dark .action-btn:hover {
+    background: #263245;
+}
+
+body.light #scrollBottomBtn {
+    background: #2563eb;
+}
+
+body.dark #scrollBottomBtn {
+    background: #2563eb;
+}
+
+::selection {
+    background: #4f8cff55;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #64748b66;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #64748baa;
+}
