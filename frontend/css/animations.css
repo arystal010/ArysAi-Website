@@ -1,0 +1,235 @@
+
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(18px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes slideLeft{
+    from{
+        opacity:0;
+        transform:translateX(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes slideRight{
+    from{
+        opacity:0;
+        transform:translateX(-30px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes scaleIn{
+    from{
+        opacity:0;
+        transform:scale(.94);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@keyframes pulse{
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.05);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+@keyframes blink{
+
+    0%{
+        opacity:.2;
+    }
+
+    50%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:.2;
+    }
+
+}
+
+@keyframes bounce{
+
+    0%,80%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    40%{
+
+        transform:translateY(-7px);
+
+    }
+
+}
+
+@keyframes rotate{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+.message{
+
+    animation:fadeUp .25s ease;
+
+}
+
+.message.user{
+
+    animation:slideLeft .25s ease;
+
+}
+
+.message.ai{
+
+    animation:slideRight .25s ease;
+
+}
+
+.bubble{
+
+    animation:scaleIn .22s ease;
+
+}
+
+.logo-icon{
+
+    animation:pulse 4s infinite;
+
+}
+
+.typing{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+}
+
+.typing span{
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:#60a5fa;
+
+    animation:blink 1.2s infinite;
+
+}
+
+.typing span:nth-child(2){
+
+    animation-delay:.2s;
+
+}
+
+.typing span:nth-child(3){
+
+    animation-delay:.4s;
+
+}
+
+.primary:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.secondary:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.icon-btn:hover{
+
+    transform:scale(1.06);
+
+}
+
+.action-btn:hover{
+
+    transform:scale(1.08);
+
+}
+
+#scrollBottomBtn:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.theme-transition,
+.theme-transition *{
+
+    transition:
+    background-color .25s ease,
+    color .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+
+}
+
+.fade-enter{
+
+    animation:fadeIn .2s ease;
+
+}
+
+.rotate{
+
+    animation:rotate .8s linear infinite;
+
+}
