@@ -1,72 +1,75 @@
-// worker/routers
+// worker/router.js
 
-import {
-    getHealthyModels,
-    recordFailure,
-    recordSuccess
-} from "./models.js";
-
+import { nextHealthyModels } from "./health.js";
+import { markFailure } from "./health.js";
+import { markSuccess } from "./health.js";
 import { requestModel } from "./openrouter.js";
-
-const STREAM_HEADERS = {
-
-    "Content-Type":"text/event-stream; charset=utf-8",
-
-    "Cache-Control":"no-cache, no-transform",
-
-    "Connection":"keep-alive"
-
-};
-
-function mergeHeaders(cors){
-
-    return {
-
-        ...cors,
-
-        ...STREAM_HEADERS
-
-    };
-
-}
+import { streamHeaders } from "./utils.js";
+import { buildTextEvent } from "./utils.js";
+import { buildDoneEvent } from "./utils.js";
 
 export async function handleChatRequest(
-
     request,
-
     env,
-
     cors
+) {
 
-){
+    let body;
 
-    const body = await request.json();
+    try {
 
-    const messages = body.messages ?? [];
+        body = await request.json();
 
-    const models = getHealthyModels();
-
-    if(models.length===0){
+    } catch {
 
         return new Response(
 
-data: ${JSON.stringify({
-choices:[
-{
-delta:{
-content:"All AI providers are currently busy. Please try again in a moment."
-}
-}
-]
-})}
+            JSON.stringify({
 
-data: [DONE]
+                error: "Invalid JSON"
 
-,
+            }),
 
             {
 
-                headers:mergeHeaders(cors)
+                status: 400,
+
+                headers: {
+
+                    ...cors,
+
+                    "Content-Type":
+                        "application/json"
+
+                }
+
+            }
+
+        );
+
+    }
+
+    const messages =
+        body.messages ?? [];
+
+    const models =
+        nextHealthyModels();
+
+    if (models.length === 0) {
+
+        return new Response(
+
+            buildTextEvent(
+                "All AI providers are currently busy. Please try again in a moment."
+            ) +
+            buildDoneEvent(),
+
+            {
+
+                status: 503,
+
+                headers:
+                    streamHeaders(cors)
 
             }
 
@@ -76,37 +79,43 @@ data: [DONE]
 
     let lastError = null;
 
-    for(const model of models){
+    for (const model of models) {
 
-        const controller = new AbortController();
+        const controller =
+            new AbortController();
 
-        const timeout = setTimeout(
+        const timeout =
+            setTimeout(
 
-            ()=>controller.abort(),
+                () => {
 
-            60000
+                    controller.abort();
 
-        );
+                },
 
-        try{
+                60000
+
+            );
+
+        try {
 
             const response =
-
                 await requestModel({
 
                     env,
 
-                    model:model.id,
+                    model: model.id,
 
                     messages,
 
-                    signal:controller.signal
+                    signal:
+                        controller.signal
 
                 });
 
             clearTimeout(timeout);
 
-            recordSuccess(model.id);
+            markSuccess(model.id);
 
             return new Response(
 
@@ -114,9 +123,10 @@ data: [DONE]
 
                 {
 
-                    status:200,
+                    status: 200,
 
-                    headers:mergeHeaders(cors)
+                    headers:
+                        streamHeaders(cors)
 
                 }
 
@@ -124,46 +134,40 @@ data: [DONE]
 
         }
 
-        catch(error){
+        catch (error) {
 
             clearTimeout(timeout);
 
-            recordFailure(model.id);
-
             lastError = error;
 
-            if(error.retryable){
-
-                continue;
-            }
+            markFailure(
+                model.id
+            );
 
             continue;
 
         }
 
     }
-
     return new Response(
 
-data: ${JSON.stringify({
-choices:[
-{
-delta:{
-content:"All AI providers are currently busy. Please try again in a moment."
-}
-}
-]
-})}
+        buildTextEvent(
 
-data: [DONE]
+            "All AI providers are currently busy. Please try again in a moment."
 
-,
+        ) +
+
+        buildDoneEvent(),
 
         {
 
-            status:lastError?.status ?? 503,
+            status:
 
-            headers:mergeHeaders(cors)
+                lastError?.status ?? 503,
+
+            headers:
+
+                streamHeaders(cors)
 
         }
 
