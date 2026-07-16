@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+    <title>Arys AI</title>
+    <meta name="theme-color" content="#0f172a">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/themes.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/chat.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="module" src="./js/app.js" defer></script>
+</head>
+
+<body class="dark">
+    <div id="app">
+        <header class="topbar">
+            <button id="newChatBtn" class="icon-btn" title="New chat">＋</button>
+            <div class="logo">
+                <div class="logo-icon">AI</div>
+                <span>Arys AI</span>
+            </div>
+            <div class="topbar-right">
+                <button id="settingsBtn" class="icon-btn" title="Settings">⚙️</button>
+                <button id="themeBtn" class="icon-btn" title="Toggle theme">☀️</button>
+            </div>
+        </header>
+
+        <!-- Settings Panel -->
+        <aside id="settingsPanel" class="settings-panel">
+            <div class="settings-header">
+                <h2>Settings</h2>
+                <button id="settingsCloseBtn" class="icon-btn" title="Close">✕</button>
+            </div>
+            <div class="settings-body">
+                <label class="setting-row">
+                    <span>Enable Web Search</span>
+                    <input type="checkbox" id="enableWebSearch" checked />
+                </label>
+                <label class="setting-row">
+                    <span>Enable Automatic Search</span>
+                    <input type="checkbox" id="enableAutoSearch" checked />
+                </label>
+                <label class="setting-row">
+                    <span>Maximum Search Results</span>
+                    <select id="maxSearchResults">
+                        <option value="5">5</option>
+                        <option value="6" selected>6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                </label>
+                <label class="setting-row">
+                    <span>Cache Duration (seconds)</span>
+                    <select id="cacheDuration">
+                        <option value="60">60s</option>
+                        <option value="120">120s</option>
+                        <option value="300" selected>300s</option>
+                        <option value="600">600s</option>
+                        <option value="1800">1800s</option>
+                        <option value="3600">3600s</option>
+                    </select>
+                </label>
+                <label class="setting-row">
+                    <span>Show Search Indicator</span>
+                    <input type="checkbox" id="showSearchIndicator" checked />
+                </label>
+            </div>
+            <div class="settings-footer">
+                <button id="settingsResetBtn" class="secondary">Reset to Defaults</button>
+            </div>
+        </aside>
+
+        <!-- Overlay for settings panel -->
+        <div id="settingsOverlay" class="settings-overlay"></div>
+
+        <main id="chatContainer">
+            <div id="messages">
+                <section class="welcome">
+                    <h1>What can I help with?</h1>
+                    <p>Conversations are temporary.</p>
+                </section>
+            </div>
+            <button id="scrollBottomBtn" title="Scroll to bottom">↓</button>
+        </main>
+        <footer class="composer">
+            <div class="input-box">
+                <textarea id="prompt" rows="1" placeholder="Message Arys AI..."></textarea>
+                <div class="composer-actions">
+                    <button id="stopBtn" class="secondary" hidden>Stop</button>
+                    <button id="sendBtn" class="primary">Send</button>
+                </div>
+            </div>
+            <div class="footer-text">AI can make mistakes. Verify important information.</div>
+        </footer>
+    </div>
+</body>
+
+</html>
